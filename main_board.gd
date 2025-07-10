@@ -11,6 +11,7 @@ var start_pos = Vector2.ZERO
 func _ready() -> void:
 	#trait_container.connect("mouseclick", _on_child_clicked)
 	pc.connect("mouseclick", _on_area_clicked)
+	character.connect("mouseclick", _on_area_clicked)
 
 func _on_area_clicked(global_pos):
 	start_pos = global_pos

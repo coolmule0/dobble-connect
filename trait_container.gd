@@ -8,6 +8,12 @@ extends Marker2D
 
 signal mouseclick(click_coords: Vector2)
 
+# Tween vars
+var hover_tween: Tween = null
+var normal_scale = Vector2.ONE
+var hover_scale = Vector2(1.2, 1.2)
+var tween_duration = 0.15
+
 func _ready() -> void:
 	update_sprite()
 
@@ -21,6 +27,18 @@ func update_sprite() -> void:
 
 
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	# If clicked within this area
 	if event is InputEventMouseButton and event.pressed:
-		#print("Area2D clicked!")
 		mouseclick.emit(get_global_mouse_position())
+
+func _on_area_2d_mouse_entered():
+	_start_hover_tween(hover_scale)
+
+func _on_area_2d_mouse_exited():
+	_start_hover_tween(normal_scale)
+
+func _start_hover_tween(target_scale: Vector2):
+	if hover_tween:
+		hover_tween.kill()  # Stop previous tween if it's still running
+	hover_tween = create_tween()
+	hover_tween.tween_property(sprite_2d, "scale", target_scale, tween_duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
