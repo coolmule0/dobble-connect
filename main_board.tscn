@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bi5amw1dsfvet"]
+
+[ext_resource type="PackedScene" uid="uid://dpv6ah76wvgf8" path="res://character.tscn" id="1_4rgaq"]
+[ext_resource type="Script" uid="uid://cr0j6p0p7q673" path="res://main_board.gd" id="1_s3r4q"]
+
+[node name="MainBoard" type="Node2D"]
+script = ExtResource("1_s3r4q")
+
+[node name="PC" parent="." instance=ExtResource("1_4rgaq")]
+position = Vector2(454, 430)
+
+[node name="Character" parent="." instance=ExtResource("1_4rgaq")]
+position = Vector2(447, 188)
+
+[node name="Line2D" type="Line2D" parent="."]

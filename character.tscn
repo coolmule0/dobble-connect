@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=3 uid="uid://dpv6ah76wvgf8"]
+
+[ext_resource type="Script" uid="uid://susowr41mniy" path="res://character.gd" id="1_0qfo5"]
+[ext_resource type="Texture2D" uid="uid://e26x0i0hq5mc" path="res://assets/kenney_shape-characters/PNG/Default/blue_body_circle.png" id="1_wfnr8"]
+[ext_resource type="Texture2D" uid="uid://cs34dc44h67se" path="res://assets/kenney_shape-characters/PNG/Default/face_a.png" id="2_px5sl"]
+[ext_resource type="PackedScene" uid="uid://daqo6w1gco3t1" path="res://trait_container.tscn" id="3_0qfo5"]
+[ext_resource type="Texture2D" uid="uid://cvjmju8rx05u" path="res://assets/kenney_shape-characters/PNG/Default/red_hand_open.png" id="4_yxww1"]
+[ext_resource type="Texture2D" uid="uid://dfbhy2cx6fw1g" path="res://assets/kenney_shape-characters/PNG/Default/green_hand_peace.png" id="5_px5sl"]
+
+[node name="Character" type="Node2D"]
+script = ExtResource("1_0qfo5")
+traits = Array[CompressedTexture2D]([ExtResource("5_px5sl"), ExtResource("5_px5sl"), ExtResource("5_px5sl")])
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_wfnr8")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+texture = ExtResource("2_px5sl")
+
+[node name="TraitsContainer" type="Node2D" parent="."]
+
+[node name="TraitContainer" parent="TraitsContainer" instance=ExtResource("3_0qfo5")]
+position = Vector2(0, -115)
+
+[node name="TraitContainer2" parent="TraitsContainer" instance=ExtResource("3_0qfo5")]
+position = Vector2(97, -79)
+trait_sprite = ExtResource("4_yxww1")
+
+[node name="TraitContainer3" parent="TraitsContainer" instance=ExtResource("3_0qfo5")]
+position = Vector2(-96, -87)
+trait_sprite = ExtResource("5_px5sl")
