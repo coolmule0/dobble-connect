@@ -6,7 +6,8 @@ extends Marker2D
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
 
-signal mouseclick(click_coords: Vector2)
+#signal mouseclick(click_coords: Vector2)
+#signal mouse_up(click_coords: Vector2)
 
 # Tween vars
 var hover_tween: Tween = null
@@ -26,10 +27,13 @@ func update_sprite() -> void:
 		sprite_2d.texture = trait_sprite
 
 
-func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
-	# If clicked within this area
-	if event is InputEventMouseButton and event.pressed:
-		mouseclick.emit(get_global_mouse_position())
+#func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	## If clicked within this area
+	#if event is InputEventMouseButton:
+		#if event.pressed:
+			#mouseclick.emit(get_global_mouse_position())
+		#else:
+			#mouse_up.emit(get_global_mouse_position())
 
 func _on_area_2d_mouse_entered():
 	_start_hover_tween(hover_scale)

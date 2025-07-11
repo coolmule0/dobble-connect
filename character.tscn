@@ -21,6 +21,7 @@ texture = ExtResource("2_px5sl")
 
 [node name="TraitContainer" parent="TraitsContainer" instance=ExtResource("3_0qfo5")]
 position = Vector2(0, -115)
+trait_sprite = null
 
 [node name="TraitContainer2" parent="TraitsContainer" instance=ExtResource("3_0qfo5")]
 position = Vector2(97, -79)

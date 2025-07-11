@@ -1,22 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://daqo6w1gco3t1"]
+[gd_scene load_steps=3 format=3 uid="uid://daqo6w1gco3t1"]
 
 [ext_resource type="Script" uid="uid://bpmf4etn32ups" path="res://trait_container.gd" id="1_2a885"]
-[ext_resource type="Texture2D" uid="uid://bxapnorxfv86" path="res://assets/kenney_shape-characters/PNG/Default/purple_hand_open.png" id="2_dkspg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2a885"]
-radius = 26.0
+radius = 33.0
 
 [node name="Marker2D" type="Marker2D"]
 script = ExtResource("1_2a885")
-trait_sprite = ExtResource("2_dkspg")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." groups=["Connectable"]]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" groups=["Connectable"]]
 shape = SubResource("CircleShape2D_2a885")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_dkspg")
 
 [connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
