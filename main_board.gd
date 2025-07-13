@@ -5,7 +5,7 @@ extends Node2D
 
 @export var pc_traits: Array[CompressedTexture2D]
 @export var npc_traits: Array[CompressedTexture2D]
-@onready var label_score: Label = $CanvasLayer/ScoreContainer/Score
+@onready var label_score: Label = %Score
 
 var is_drawing = false
 var start_pos = Vector2.ZERO
@@ -31,12 +31,15 @@ func _input(event):
 					var released = get_connectable_at_mouse()
 					if released and released != start_source:
 						#print("Connected from %s to %s" % [start_source.name, released.name])
+						is_drawing = false
 						_check_connection(start_source.get_owner(), released.get_owner())
 					else:
 						print("Connection canceled")
-					is_drawing = false
-					line.clear_points()
-					start_source = null
+						is_drawing = false
+						line.clear_points()
+						start_source = null
+	if Input.is_action_pressed("ui_cancel"):
+		get_tree().quit()
 
 func _process(delta):
 	if is_drawing:
@@ -62,12 +65,24 @@ func _check_connection(start_trait: TraitContainer, end_trait: TraitContainer):
 	# TODO: possibly check owner to ensure initialtes from 2 different character
 	if start_trait.trait_sprite == end_trait.trait_sprite:
 		print("Correct!")
-		# TODO: turn line green. move on
+		# turn line green. move on
+		var twe = create_tween()
+		twe.tween_property(line, "modulate", Color.GREEN, 0.15)
 		LevelManager.score += 1
 		LevelManager.next_scene()
 	else:
 		print("Not Right!")
-		# TODO: turn line red and shake
+		# turn line red and shake
+		var twe = create_tween()
+		var line_col = line.get_default_color()
+		line.default_color = Color.RED
+		#twe.tween_property(line, "modulate", Color.RED, 0.15)
+		for i in range(3):
+			twe.tween_property(line, "position:x", -5, 0.05)
+			twe.tween_property(line, "position:x", 5, 0.05)
+		twe.tween_callback(line.clear_points)
+		twe.tween_property(line, "default_color", line_col, 0.01)
+		#line.default_color = line_col
 
 func init_level(init_vars: Dictionary) -> void:
 	pc_traits = init_vars["pc"]

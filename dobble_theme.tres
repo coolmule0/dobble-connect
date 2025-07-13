@@ -1,0 +1,24 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://b0ry4n54nyppf"]
+
+[ext_resource type="Texture2D" uid="uid://dv0m6j5i4n8cd" path="res://assets/kenney_ui-pack-pixel-adventure/tile_0000.png" id="1_cy87y"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cy87y"]
+texture = ExtResource("1_cy87y")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_67jrp"]
+texture = ExtResource("1_cy87y")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3yixm"]
+texture = ExtResource("1_cy87y")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_84nan"]
+texture = ExtResource("1_cy87y")
+
+[resource]
+Button/colors/font_color = Color(0, 0, 0, 1)
+Button/colors/font_focus_color = Color(0, 0, 0, 1)
+Button/colors/font_hover_color = Color(1, 0, 0, 1)
+Button/styles/focus = SubResource("StyleBoxTexture_cy87y")
+Button/styles/hover = SubResource("StyleBoxTexture_67jrp")
+Button/styles/normal = SubResource("StyleBoxTexture_3yixm")
+Button/styles/pressed = SubResource("StyleBoxTexture_84nan")

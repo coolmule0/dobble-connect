@@ -7,23 +7,31 @@
 script = ExtResource("1_s3r4q")
 
 [node name="PC" parent="." instance=ExtResource("1_4rgaq")]
-position = Vector2(454, 430)
+position = Vector2(324, 529)
 
 [node name="Character" parent="." instance=ExtResource("1_4rgaq")]
-position = Vector2(441, 184)
+position = Vector2(324, 234)
 
 [node name="Line2D" type="Line2D" parent="."]
+begin_cap_mode = 2
+end_cap_mode = 2
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="ScoreContainer" type="HBoxContainer" parent="CanvasLayer"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
 offset_right = 40.0
 offset_bottom = 40.0
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
 
-[node name="ScoreText" type="Label" parent="CanvasLayer/ScoreContainer"]
+[node name="ScoreContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+
+[node name="ScoreText" type="Label" parent="CanvasLayer/MarginContainer/ScoreContainer"]
 layout_mode = 2
 text = "Score: "
 
-[node name="Score" type="Label" parent="CanvasLayer/ScoreContainer"]
+[node name="Score" type="Label" parent="CanvasLayer/MarginContainer/ScoreContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "N"

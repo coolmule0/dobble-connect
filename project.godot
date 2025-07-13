@@ -11,13 +11,17 @@ config_version=5
 [application]
 
 config/name="Dobble Connect"
-run/main_scene="uid://bi5amw1dsfvet"
+run/main_scene="uid://ehd3dlqo70ug"
 config/features=PackedStringArray("4.4", "Mobile")
-config/icon="res://icon.svg"
+config/icon="uid://bm61wktm5lb0w"
 
 [autoload]
 
 LevelManager="*res://level_manager.gd"
+
+[display]
+
+window/size/viewport_width=648
 
 [global_group]
 

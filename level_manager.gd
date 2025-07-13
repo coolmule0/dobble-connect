@@ -13,17 +13,29 @@ const HAND_YELLOW_ROCK = preload("res://assets/kenney_shape-characters/PNG/Defau
 var sprite_paths: PackedStringArray = []
 const SPRITE_PATH = "res://assets/traits/"
 
+# left - level/score. Right - how many traits per char
+var score_breaks := {
+	0: 2,
+	2: 3,
+	10: 4,
+	20: 5
+}
+
 ## Move onto next scene with transition
 func next_scene():
-	var ts = get_new_traits()
+	# how many traits this level?
+	var nprops := get_property_count(score)
+	var ts = get_new_traits(nprops)
 	var transition = SWIPE_TRANSITION.instantiate()
 	get_tree().root.add_child(transition)
 	transition.start_transition(level_scene, ts)
 
 ## Calculate traits for a level
-func get_new_traits() -> Dictionary[String, Array]:
+func get_new_traits(n_traits_per_char: int = 3) -> Dictionary[String, Array]:
 	#var pc_traits: Array[CompressedTexture2D] = [HAND_YELLOW_POINT,HAND_YELLOW_POINT,HAND_YELLOW_POINT]
 	#var char_traits: Array[CompressedTexture2D] = [HAND_YELLOW_ROCK,HAND_YELLOW_ROCK,HAND_YELLOW_ROCK]
+	# At least 1, so they can match
+	assert(n_traits_per_char >= 1)
 	
 	# Shuffle available options
 	var shuffled = Array(sprite_paths.duplicate())
@@ -33,7 +45,7 @@ func get_new_traits() -> Dictionary[String, Array]:
 	var npc_sprite_paths = [shuffled[0]]
 	shuffled.pop_front()
 	# fill out rest
-	for i in range(2):
+	for i in range(n_traits_per_char-1):
 		pc_sprite_paths.append(shuffled[0])
 		shuffled.pop_front()
 		npc_sprite_paths.append(shuffled[0])
@@ -54,3 +66,11 @@ func get_new_traits() -> Dictionary[String, Array]:
 func _ready() -> void:
 	# get available trait sprites
 	sprite_paths = ResourceLoader.list_directory(SPRITE_PATH)
+
+## Given the level, return the number of properties, defined by score_breaks
+func get_property_count(level: int) -> int:
+	var result := 0
+	for score_level in score_breaks.keys():
+		if level >= score_level:
+			result = score_breaks[score_level]
+	return result
