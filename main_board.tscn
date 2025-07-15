@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://bi5amw1dsfvet"]
+[gd_scene load_steps=5 format=3 uid="uid://bi5amw1dsfvet"]
 
 [ext_resource type="PackedScene" uid="uid://dpv6ah76wvgf8" path="res://character.tscn" id="1_4rgaq"]
 [ext_resource type="Script" uid="uid://cr0j6p0p7q673" path="res://main_board.gd" id="1_s3r4q"]
+[ext_resource type="AudioStream" uid="uid://md5rqn523412" path="res://assets/audio/zapsplat_multimedia_gameshow_correct_answer_ping_ring_chime_001_92774.mp3" id="3_qnik1"]
+[ext_resource type="AudioStream" uid="uid://cxonhxi4rkhu7" path="res://assets/audio/zapsplat_multimedia_game_sound_subtle_error_tone_incorrect_wrong_answer_etc_002_80749.mp3" id="4_y0iwf"]
 
 [node name="MainBoard" type="Node2D"]
 script = ExtResource("1_s3r4q")
@@ -35,3 +37,13 @@ text = "Score: "
 unique_name_in_owner = true
 layout_mode = 2
 text = "N"
+
+[node name="CorrectSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_qnik1")
+volume_db = -12.0
+bus = &"SFX"
+
+[node name="WrongSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_y0iwf")
+volume_db = -12.0
+bus = &"SFX"

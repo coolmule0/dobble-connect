@@ -6,6 +6,8 @@ extends Node2D
 @export var pc_traits: Array[CompressedTexture2D]
 @export var npc_traits: Array[CompressedTexture2D]
 @onready var label_score: Label = %Score
+@onready var correct_sound: AudioStreamPlayer = $CorrectSound
+@onready var wrong_sound: AudioStreamPlayer = $WrongSound
 
 var is_drawing = false
 var start_pos = Vector2.ZERO
@@ -70,6 +72,7 @@ func _check_connection(start_trait: TraitContainer, end_trait: TraitContainer):
 		twe.tween_property(line, "modulate", Color.GREEN, 0.15)
 		LevelManager.score += 1
 		LevelManager.next_scene()
+		correct_sound.play()
 	else:
 		print("Not Right!")
 		# turn line red and shake
@@ -83,17 +86,13 @@ func _check_connection(start_trait: TraitContainer, end_trait: TraitContainer):
 		twe.tween_callback(line.clear_points)
 		twe.tween_property(line, "default_color", line_col, 0.01)
 		#line.default_color = line_col
+		wrong_sound.play()
 
 func init_level(init_vars: Dictionary) -> void:
 	pc_traits = init_vars["pc"]
 	npc_traits = init_vars["npc"]
 	(func(): pc.traits = pc_traits).call_deferred()
 	(func(): character.traits = npc_traits).call_deferred()
-	#call_deferred("init_level_after_ready")
-
-#func init_level_after_ready() -> void:
-	#pc.traits = pc_traits
-	#character.traits = npc_traits
 
 func _ready() -> void:
 	label_score.text = str(LevelManager.score)
